@@ -4,8 +4,9 @@
   "description": "Udacity Image API assignment using Node.js, Express, TypeScript and Jasmine",
   "main": "index.js",
   "scripts": {
-    "start":"npm run build && node build",
-    "build":"npx tsc"
+    "start": "npm run build && node build",
+    "build": "npx tsc",
+    "lint": "eslint . --ext .ts"
   },
   "keywords": [
     "Node",
@@ -17,6 +18,9 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^14.14.37",
+    "@typescript-eslint/eslint-plugin": "^4.20.0",
+    "@typescript-eslint/parser": "^4.20.0",
+    "eslint": "^7.23.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.3"
   }
