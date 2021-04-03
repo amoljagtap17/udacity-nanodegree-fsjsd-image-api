@@ -1,0 +1,17 @@
+{
+  "name": "udacity-nanodegree-fsjsd-image-api",
+  "version": "1.0.0",
+  "description": "Udacity Image API assignment using Node.js, Express, TypeScript and Jasmine",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Node",
+    "Express",
+    "TypeScript",
+    "Jasmine"
+  ],
+  "author": "Amol Jagtap",
+  "license": "ISC"
+}
