@@ -1,8 +1,9 @@
 import express from 'express'
+import { imageParamsValidator } from '../../middlewares'
 
 const imagesRoutes = express.Router()
 
-imagesRoutes.get('/', (req, res) => {
+imagesRoutes.get('/', imageParamsValidator, (req, res) => {
   res.send('Images Route...')
 })
 
