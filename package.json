@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run build && node build",
     "build": "npx tsc",
-    "lint": "eslint . --ext .ts",
+    "lint": "eslint . --ext .ts --quiet",
     "prettier": "prettier --config .prettierrc src/**/*.ts --write"
   },
   "keywords": [
