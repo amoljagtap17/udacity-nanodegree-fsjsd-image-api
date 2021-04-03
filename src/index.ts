@@ -1,3 +1,13 @@
-const add = (a: number, b: number) => a + b
+import express from 'express'
 
-console.log(add(4, 5))
+const app = express()
+
+const PORT = 8000
+
+app.get('/', (req, res) => {
+  res.send('Hey there Express!!')
+})
+
+app.listen(PORT, () => {
+  console.log(`Express application stated on http://localhost:${PORT}`)
+})
