@@ -33,7 +33,6 @@
   },
   "lint-staged": {
     "*.ts": [
-      "eslint . --ext .ts --quiet",
       "prettier --config .prettierrc src/**/*.ts --write"
     ]
   }
