@@ -1,11 +1,8 @@
-import {
-  DisplayProcessor,
-  StacktraceOption,
-  SpecReporter,
-} from 'jasmine-spec-reporter'
+/* eslint-disable @typescript-eslint/no-var-requires */
+import { DisplayProcessor, StacktraceOption } from 'jasmine-spec-reporter'
 import SuiteInfo = jasmine.SuiteInfo
 
-// const SpecReporter = require('jasmine-spec-reporter').SpecReporter
+const SpecReporter = require('jasmine-spec-reporter').SpecReporter
 
 class CustomProcessor extends DisplayProcessor {
   public displayJasmineStarted(info: SuiteInfo, log: string): string {
