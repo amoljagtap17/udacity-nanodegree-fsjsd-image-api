@@ -1,15 +1,5 @@
 import express from 'express'
-
-interface IQueryParams {
-  filename: string
-  width: string
-  height: string
-}
-
-interface IError {
-  message: string
-  description: string
-}
+import { IError, IQueryParams } from '../types'
 
 export const imageParamsValidator = (
   req: express.Request,
