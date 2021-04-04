@@ -1,7 +1,6 @@
 import express from 'express'
-import sharp from 'sharp'
-import { promises as fs } from 'fs'
 import { IQueryParams } from '../types'
+import { resizeImage as resizeImageUtil } from '../utils'
 
 export const resizeImage = async (
   req: express.Request,
@@ -9,25 +8,26 @@ export const resizeImage = async (
   next: express.NextFunction
 ): Promise<void> => {
   const { filename, width, height } = (req.query as unknown) as IQueryParams
-  const resizedImgPath = `src/assets/thumbs/${filename}_${width}_${height}.jpg`
 
   try {
-    const originalImage = await fs.readFile(`src/assets/images/${filename}.jpg`)
+    const { error } = await resizeImageUtil({ filename, width, height })
 
-    await sharp(originalImage)
-      .resize({
-        width: Number(width),
-        height: Number(height),
-        fit: sharp.fit.cover,
-        position: sharp.strategy.entropy,
+    if (error) {
+      res.status(500).send({
+        errors: [
+          {
+            message: 'Server Error',
+            description: error,
+          },
+        ],
       })
-      .toFile(resizedImgPath)
+    }
   } catch (error) {
     res.status(500).send({
       errors: [
         {
           message: 'Server Error',
-          description: 'Error encountered during image resizing.',
+          description: error,
         },
       ],
     })
