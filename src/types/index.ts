@@ -1,7 +1,7 @@
 export interface IQueryParams {
-  filename: string
-  width: string
-  height: string
+  filename?: string
+  width?: string
+  height?: string
 }
 
 export interface IError {
