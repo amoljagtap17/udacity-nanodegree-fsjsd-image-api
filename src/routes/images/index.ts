@@ -9,22 +9,43 @@ imagesRoutes.get('/', imageParamsValidator, async (req, res) => {
   const { filename, width, height } = req.query
   const resizedImgPath = `src/assets/thumbs/${filename}_${width}_${height}.jpg`
 
-  const originalImage = await fs.readFile(`src/assets/images/${filename}.jpg`)
+  try {
+    await fs.access(`src/assets/images/${filename}.jpg`)
+  } catch (error) {
+    res.status(400).send('Image not found.')
 
-  await sharp(originalImage)
-    .resize({
-      width: Number(width),
-      height: Number(height),
-      fit: sharp.fit.cover,
-      position: sharp.strategy.entropy,
+    return
+  }
+
+  try {
+    const originalImage = await fs.readFile(`src/assets/images/${filename}.jpg`)
+
+    await sharp(originalImage)
+      .resize({
+        width: Number(width),
+        height: Number(height),
+        fit: sharp.fit.cover,
+        position: sharp.strategy.entropy,
+      })
+      .toFile(resizedImgPath)
+
+    const resizedImage = await fs.readFile(resizedImgPath)
+
+    res.type('jpg')
+
+    res.send(resizedImage)
+  } catch (error) {
+    res.status(500).send({
+      errors: [
+        {
+          message: 'Server Error',
+          description: 'Error encountered during image resizing.',
+        },
+      ],
     })
-    .toFile(resizedImgPath)
 
-  const resizedImage = await fs.readFile(resizedImgPath)
-
-  res.type('jpg')
-
-  res.send(resizedImage)
+    return
+  }
 })
 
 export { imagesRoutes }
