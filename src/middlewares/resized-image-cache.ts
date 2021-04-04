@@ -24,4 +24,6 @@ export const resizedImageCache = async (
   res.type('jpg')
 
   res.send(resizedImage)
+
+  console.log('image is served from cache.')
 }

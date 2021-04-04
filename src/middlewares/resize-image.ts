@@ -13,14 +13,7 @@ export const resizeImage = async (
     const { error } = await resizeImageUtil({ filename, width, height })
 
     if (error) {
-      res.status(500).send({
-        errors: [
-          {
-            message: 'Server Error',
-            description: error,
-          },
-        ],
-      })
+      throw new Error(error)
     }
   } catch (error) {
     res.status(500).send({
@@ -34,6 +27,8 @@ export const resizeImage = async (
 
     return
   }
+
+  console.log('image is resized.')
 
   next()
 }
