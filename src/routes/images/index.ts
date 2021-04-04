@@ -4,17 +4,24 @@ import {
   imageParamsValidator,
   imageExistsValidator,
   resizeImage,
+  resizedImageCache,
 } from '../../middlewares'
+import { IQueryParams } from '../../types'
 
 const imagesRoutes = express.Router()
 
-const middlewares = [imageParamsValidator, imageExistsValidator, resizeImage]
+const middlewares = [
+  imageParamsValidator,
+  imageExistsValidator,
+  resizedImageCache,
+  resizeImage,
+]
 
 imagesRoutes.get(
   '/',
   middlewares,
   async (req: express.Request, res: express.Response) => {
-    const { filename, width, height } = req.query
+    const { filename, width, height } = (req.query as unknown) as IQueryParams
     const resizedImgPath = `src/assets/thumbs/${filename}_${width}_${height}.jpg`
 
     try {
