@@ -35,9 +35,9 @@ export const resizeImage = async (params: IQueryParams) => {
 
 export const getImage = async (filename: string) => {
   try {
-    const originalImage = await fs.readFile(filename)
+    const image = await fs.readFile(filename)
 
-    return originalImage
+    return image
   } catch (error) {
     throw new Error('Error encountered during file read.')
   }

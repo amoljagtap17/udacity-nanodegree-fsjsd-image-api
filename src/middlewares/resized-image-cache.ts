@@ -1,6 +1,7 @@
 import express from 'express'
 import { promises as fs } from 'fs'
 import { IQueryParams } from '../types'
+import { getImage } from '../utils'
 
 export const resizedImageCache = async (
   req: express.Request,
@@ -13,14 +14,12 @@ export const resizedImageCache = async (
   try {
     await fs.access(resizedImgPath)
   } catch (error) {
-    console.log('Resized Image not found!')
-
     next()
 
     return
   }
 
-  const resizedImage = await fs.readFile(resizedImgPath)
+  const resizedImage = await getImage(resizedImgPath)
 
   res.type('jpg')
 
