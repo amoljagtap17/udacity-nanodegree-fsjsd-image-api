@@ -18,7 +18,7 @@ export const imageParamsValidator = (
     errors.push({ message, description })
   }
 
-  if (isNaN(Number(width)) || isNaN(Number(height))) {
+  if ((width && isNaN(Number(width))) || (height && isNaN(Number(height)))) {
     description = 'Required width and height params are not numeric.'
 
     errors.push({ message, description })

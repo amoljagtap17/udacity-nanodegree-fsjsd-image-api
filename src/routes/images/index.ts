@@ -1,11 +1,14 @@
 import express from 'express'
-import sharp from 'sharp'
 import { promises as fs } from 'fs'
-import { imageParamsValidator, imageExistsValidator } from '../../middlewares'
+import {
+  imageParamsValidator,
+  imageExistsValidator,
+  resizeImage,
+} from '../../middlewares'
 
 const imagesRoutes = express.Router()
 
-const middlewares = [imageParamsValidator, imageExistsValidator]
+const middlewares = [imageParamsValidator, imageExistsValidator, resizeImage]
 
 imagesRoutes.get(
   '/',
@@ -15,19 +18,6 @@ imagesRoutes.get(
     const resizedImgPath = `src/assets/thumbs/${filename}_${width}_${height}.jpg`
 
     try {
-      const originalImage = await fs.readFile(
-        `src/assets/images/${filename}.jpg`
-      )
-
-      await sharp(originalImage)
-        .resize({
-          width: Number(width),
-          height: Number(height),
-          fit: sharp.fit.cover,
-          position: sharp.strategy.entropy,
-        })
-        .toFile(resizedImgPath)
-
       const resizedImage = await fs.readFile(resizedImgPath)
 
       res.type('jpg')
@@ -38,7 +28,7 @@ imagesRoutes.get(
         errors: [
           {
             message: 'Server Error',
-            description: 'Error encountered during image resizing.',
+            description: 'Error encountered during reading resized image.',
           },
         ],
       })
