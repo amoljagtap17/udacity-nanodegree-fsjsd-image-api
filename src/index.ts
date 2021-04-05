@@ -6,6 +6,7 @@ export const app = express()
 
 const PORT = 8000
 
+// Create 'thumbs' directory if one does not exists
 const createThumbsDirectory = async () => {
   await fs.mkdir('src/assets/thumbs', { recursive: true })
 }

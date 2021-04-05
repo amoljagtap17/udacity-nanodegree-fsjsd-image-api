@@ -10,6 +10,7 @@ export const invalidParamsError: IError = {
   description: 'Required width and height params are not numeric.',
 }
 
+// Utils function to validate if all the parameters are passed and 'height', 'width' are numeric.
 export const validateQueryParams = (params: IQueryParams): IError[] => {
   const { filename, width, height } = params
 

@@ -2,6 +2,7 @@ import { promises as fs } from 'fs'
 import sharp from 'sharp'
 import { IQueryParams, IImageInfo } from '../types'
 
+// Util function to resize the image using 'sharp' npm package.
 export const resizeImage = async (params: IQueryParams) => {
   const { filename, width, height } = params
   const resizedImgPath = `src/assets/thumbs/${filename}_${width}_${height}.jpg`
